@@ -6,19 +6,19 @@
   <title>Domain Browser</title>
   <style>
     :root {
-      --bg: #f4efe6;
-      --panel: rgba(255, 251, 245, 0.84);
-      --panel-strong: rgba(255, 248, 239, 0.96);
-      --ink: #1f2a2c;
-      --muted: #5f6967;
-      --line: rgba(56, 78, 74, 0.16);
-      --accent: #0d7c66;
-      --accent-strong: #095847;
-      --accent-soft: rgba(13, 124, 102, 0.11);
-      --chip: #fff6e8;
-      --chip-border: rgba(179, 121, 49, 0.22);
-      --shadow: 0 18px 50px rgba(31, 42, 44, 0.1);
-      --radius: 22px;
+      --paper: #f6f0d7;
+      --paper-shadow: #e7dec0;
+      --ticket-red: #ef1632;
+      --ticket-orange: #eda034;
+      --ticket-ink: #0d2b5f;
+      --ticket-green: #103e22;
+      --ticket-stamp: #9f1431;
+      --ticket-brown: #b88955;
+      --ticket-brown-dark: #8b623a;
+      --line: rgba(13, 43, 95, 0.18);
+      --muted: rgba(13, 43, 95, 0.72);
+      --shadow: 0 18px 45px rgba(71, 45, 22, 0.16);
+      --radius: 28px;
       --maxw: 1240px;
     }
 
@@ -33,12 +33,12 @@
     body {
       margin: 0;
       min-height: 100vh;
-      color: var(--ink);
+      color: var(--ticket-ink);
       background:
-        radial-gradient(circle at top left, rgba(240, 177, 76, 0.22), transparent 28%),
-        radial-gradient(circle at top right, rgba(13, 124, 102, 0.18), transparent 24%),
-        linear-gradient(180deg, #f7f2ea 0%, #efe7da 55%, #e7ded0 100%);
-      font-family: "Avenir Next", "Segoe UI", "Trebuchet MS", sans-serif;
+        radial-gradient(circle at top left, rgba(239, 22, 50, 0.22), transparent 26%),
+        radial-gradient(circle at top right, rgba(237, 160, 52, 0.32), transparent 30%),
+        linear-gradient(180deg, #fbf7ea 0%, #f2e8cf 100%);
+      font-family: "Arial Narrow", "Helvetica Neue Condensed", "Franklin Gothic Medium", "Impact", sans-serif;
     }
 
     body::before {
@@ -46,12 +46,17 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-      background-size: 32px 32px;
-      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7), transparent 90%);
-      opacity: 0.35;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.55), transparent 18%),
+        radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.35), transparent 24%),
+        repeating-linear-gradient(
+          0deg,
+          rgba(13, 43, 95, 0.02) 0,
+          rgba(13, 43, 95, 0.02) 2px,
+          transparent 2px,
+          transparent 8px
+        );
+      opacity: 0.6;
     }
 
     .shell {
@@ -66,32 +71,70 @@
       z-index: 10;
       padding: 16px 0 18px;
       backdrop-filter: blur(18px);
-      background: linear-gradient(180deg, rgba(244, 239, 230, 0.94), rgba(244, 239, 230, 0.74));
+      background: linear-gradient(180deg, rgba(250, 245, 231, 0.94), rgba(250, 245, 231, 0.7));
     }
 
     .hero-panel {
-      border: 1px solid var(--line);
-      border-radius: calc(var(--radius) + 6px);
-      padding: 24px;
-      background: var(--panel);
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(13, 43, 95, 0.12);
+      border-radius: calc(var(--radius) + 10px);
+      padding: 26px;
+      background:
+        linear-gradient(180deg, var(--ticket-red) 0 56%, var(--paper) 56% 100%);
       box-shadow: var(--shadow);
     }
 
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      width: 132px;
+      height: 112px;
+      transform: translateX(-50%);
+      border-radius: 18px 18px 22px 22px;
+      background: linear-gradient(180deg, #c79a66, var(--ticket-brown));
+      box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      top: 56px;
+      left: 50%;
+      width: 38px;
+      height: 38px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: #f7f4ea;
+      box-shadow:
+        0 0 0 7px rgba(95, 68, 41, 0.08) inset,
+        0 2px 6px rgba(0, 0, 0, 0.08) inset;
+    }
+
     .eyebrow {
-      margin: 0 0 10px;
-      font-size: 0.82rem;
-      letter-spacing: 0.14em;
+      position: relative;
+      z-index: 1;
+      margin: 0 0 56px;
+      font-size: 0.95rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--accent-strong);
+      color: #ffe8c1;
       font-weight: 700;
     }
 
     h1 {
+      position: relative;
+      z-index: 1;
       margin: 0;
-      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
-      font-size: clamp(2rem, 3vw, 3.5rem);
-      line-height: 0.95;
-      max-width: 10ch;
+      font-family: "Arial Black", "Arial Narrow", "Helvetica Neue Condensed", sans-serif;
+      font-size: clamp(2.5rem, 5vw, 5.5rem);
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      max-width: 8ch;
+      color: var(--ticket-ink);
     }
 
     .hero-copy {
@@ -102,11 +145,15 @@
     }
 
     .hero-copy p {
+      position: relative;
+      z-index: 1;
       margin: 0;
-      color: var(--muted);
-      font-size: 1rem;
+      color: rgba(13, 43, 95, 0.9);
+      font-size: 0.98rem;
       line-height: 1.5;
       max-width: 58ch;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .meta {
@@ -117,25 +164,28 @@
     }
 
     .meta-card {
+      position: relative;
+      z-index: 1;
       min-width: 140px;
       padding: 14px 16px;
       border-radius: 16px;
-      background: var(--panel-strong);
-      border: 1px solid var(--line);
+      background: rgba(246, 240, 215, 0.92);
+      border: 2px solid rgba(13, 43, 95, 0.12);
     }
 
     .meta-label {
       display: block;
       margin-bottom: 6px;
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.14em;
       color: var(--muted);
     }
 
     .meta-value {
-      font-size: 1.4rem;
+      font-size: 2rem;
       font-weight: 700;
+      line-height: 1;
     }
 
     .controls {
@@ -154,17 +204,21 @@
       width: 100%;
       padding: 16px 18px;
       border-radius: 16px;
-      border: 1px solid rgba(56, 78, 74, 0.18);
-      background: rgba(255, 255, 255, 0.88);
-      color: var(--ink);
+      border: 2px solid rgba(13, 43, 95, 0.14);
+      background: rgba(246, 240, 215, 0.96);
+      color: var(--ticket-ink);
       font-size: 1rem;
+      font-family: inherit;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       outline: none;
       transition: border-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
     }
 
     .search:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 4px rgba(13, 124, 102, 0.12);
+      border-color: var(--ticket-stamp);
+      box-shadow: 0 0 0 4px rgba(159, 20, 49, 0.12);
       transform: translateY(-1px);
     }
 
@@ -177,9 +231,12 @@
     .clear-btn {
       padding: 0 18px;
       border-radius: 16px;
-      color: white;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
-      box-shadow: 0 12px 28px rgba(9, 88, 71, 0.22);
+      color: var(--paper);
+      background: linear-gradient(135deg, var(--ticket-stamp) 0%, #7d1028 100%);
+      box-shadow: 0 12px 28px rgba(125, 16, 40, 0.24);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
     .chip-row {
@@ -191,24 +248,27 @@
     .chip {
       padding: 9px 14px;
       border-radius: 999px;
-      border: 1px solid var(--chip-border);
-      background: var(--chip);
-      color: var(--ink);
+      border: 2px solid rgba(13, 43, 95, 0.12);
+      background: rgba(246, 240, 215, 0.96);
+      color: var(--ticket-ink);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
       transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
     }
 
     .chip:hover,
     .chip:focus-visible {
       transform: translateY(-1px);
-      border-color: rgba(13, 124, 102, 0.32);
-      background: #fff2db;
+      border-color: rgba(159, 20, 49, 0.32);
+      background: #fff3d0;
       outline: none;
     }
 
     .chip.is-active {
-      background: rgba(13, 124, 102, 0.14);
-      border-color: rgba(13, 124, 102, 0.34);
-      color: var(--accent-strong);
+      background: rgba(239, 22, 50, 0.12);
+      border-color: rgba(159, 20, 49, 0.34);
+      color: var(--ticket-stamp);
     }
 
     .results-header {
@@ -223,9 +283,10 @@
     .results-title {
       margin: 0;
       font-size: 1.05rem;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--muted);
+      font-weight: 700;
     }
 
     .results-count {
@@ -244,25 +305,37 @@
       gap: 14px;
       align-items: center;
       padding: 14px 16px;
-      border-radius: 18px;
-      background: var(--panel);
-      border: 1px solid var(--line);
+      border-radius: 22px;
+      background:
+        linear-gradient(180deg, rgba(246, 240, 215, 0.98) 0 64%, rgba(237, 160, 52, 0.18) 64% 100%);
+      border: 2px solid rgba(13, 43, 95, 0.12);
       box-shadow: var(--shadow);
       animation: rise 220ms ease both;
+    }
+
+    .row:nth-child(4n + 2) {
+      background:
+        linear-gradient(180deg, rgba(246, 240, 215, 0.98) 0 64%, rgba(239, 22, 50, 0.1) 64% 100%);
+    }
+
+    .row:nth-child(4n + 3) {
+      background:
+        linear-gradient(180deg, rgba(246, 240, 215, 0.98) 0 64%, rgba(16, 62, 34, 0.12) 64% 100%);
     }
 
     .rank {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 34px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(13, 124, 102, 0.08);
-      color: var(--accent-strong);
-      font-size: 0.8rem;
+      min-height: 42px;
+      padding: 6px 12px;
+      border-radius: 12px;
+      background: var(--ticket-red);
+      color: #fff1c9;
+      font-size: 0.92rem;
       font-weight: 700;
       white-space: nowrap;
+      letter-spacing: 0.08em;
     }
 
     .domain-wrap {
@@ -271,15 +344,19 @@
 
     .domain {
       margin: 0;
-      font-size: 1.02rem;
-      line-height: 1.2;
+      font-size: 1.32rem;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
       word-break: break-word;
     }
 
     .phrase {
       margin: 4px 0 0;
       color: var(--muted);
-      font-size: 0.88rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -288,7 +365,7 @@
     .section-label {
       margin: 0 0 6px;
       font-size: 0.72rem;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--muted);
       font-weight: 700;
@@ -305,17 +382,20 @@
       align-items: center;
       min-height: 26px;
       padding: 5px 9px;
-      border-radius: 999px;
-      font-size: 0.8rem;
+      border-radius: 10px;
+      font-size: 0.78rem;
       line-height: 1;
-      border: 1px solid rgba(56, 78, 74, 0.12);
-      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(13, 43, 95, 0.12);
+      background: rgba(255, 251, 239, 0.9);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
     }
 
     .token.tag {
-      background: rgba(13, 124, 102, 0.08);
-      color: var(--accent-strong);
-      border-color: rgba(13, 124, 102, 0.14);
+      background: rgba(16, 62, 34, 0.1);
+      color: var(--ticket-green);
+      border-color: rgba(16, 62, 34, 0.16);
     }
 
     .footer-actions {
@@ -328,19 +408,24 @@
       min-width: 220px;
       padding: 14px 20px;
       border-radius: 999px;
-      border: 1px solid rgba(13, 124, 102, 0.2);
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--accent-strong);
+      border: 2px solid rgba(13, 43, 95, 0.14);
+      background: rgba(246, 240, 215, 0.96);
+      color: var(--ticket-ink);
       box-shadow: var(--shadow);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
     .empty {
       padding: 28px;
       border-radius: var(--radius);
-      background: rgba(255, 251, 245, 0.74);
-      border: 1px dashed rgba(56, 78, 74, 0.18);
+      background: rgba(246, 240, 215, 0.84);
+      border: 2px dashed rgba(13, 43, 95, 0.18);
       color: var(--muted);
       text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
     @keyframes rise {
@@ -362,6 +447,22 @@
 
       .hero-panel {
         padding: 18px;
+      }
+
+      .hero-panel::before {
+        top: 12px;
+        width: 108px;
+        height: 90px;
+      }
+
+      .hero-panel::after {
+        top: 42px;
+        width: 34px;
+        height: 34px;
+      }
+
+      .eyebrow {
+        margin-bottom: 42px;
       }
 
       .hero-copy {
@@ -390,7 +491,7 @@
         <p class="eyebrow">Domain Index</p>
         <div class="hero-copy">
           <div>
-            <h1>Browse every tagged domain</h1>
+            <h1>Domain Ticket Office</h1>
             <p>
               Search by domain fragment, phrase word, or tag. The list preserves the current
               <code>best_first.txt</code> ordering and surfaces broad tags for quick filtering.
@@ -431,7 +532,7 @@
 
     <section aria-live="polite">
       <div class="results-header">
-        <p class="results-title">Ranked Results</p>
+        <p class="results-title">Departure Board</p>
         <div id="results-copy" class="results-count"></div>
       </div>
       <div id="results" class="results"></div>
