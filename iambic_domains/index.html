@@ -318,7 +318,7 @@
 
     .row {
       display: grid;
-      grid-template-columns: 78px minmax(220px, 1.1fr) minmax(220px, 0.9fr) minmax(0, 2.6fr);
+      grid-template-columns: 78px minmax(260px, 1.25fr) minmax(0, 2.75fr);
       gap: 14px;
       align-items: center;
       padding: 14px 16px;
@@ -635,7 +635,6 @@
     }
 
     function rowMarkup(item, index) {
-      const words = item.words.map((word) => `<span class="token">${escapeHtml(word)}</span>`).join("");
       const tags = item.tags.map((tag) => `<span class="token tag">${escapeHtml(tag)}</span>`).join("");
       return `
         <article class="row">
@@ -643,10 +642,6 @@
           <div class="domain-wrap">
             <h2 class="domain">${escapeHtml(item.domain)}</h2>
             <p class="phrase">${escapeHtml(item.phrase)}</p>
-          </div>
-          <div>
-            <p class="section-label">Words</p>
-            <div class="token-row">${words}</div>
           </div>
           <div>
             <p class="section-label">Tags</p>
