@@ -367,6 +367,19 @@
       word-break: break-word;
     }
 
+    .domain-link {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .domain-link:hover,
+    .domain-link:focus-visible {
+      color: var(--ticket-stamp);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      outline: none;
+    }
+
     .phrase {
       margin: 4px 0 0;
       color: var(--muted);
@@ -631,11 +644,14 @@
 
     function rowMarkup(item, index) {
       const tags = item.tags.map((tag) => `<span class="token tag">${escapeHtml(tag)}</span>`).join("");
+      const registrationUrl = `https://www.dynadot.com/domain/search?rscreg=${encodeURIComponent(item.domain)}`;
       return `
         <article class="row">
           <span class="rank">#${(index + 1).toLocaleString()}</span>
           <div class="domain-wrap">
-            <h2 class="domain">${escapeHtml(item.domain)}</h2>
+            <h2 class="domain">
+              <a class="domain-link" href="${registrationUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.domain)}</a>
+            </h2>
           </div>
           <div>
             <p class="section-label">Tags</p>
