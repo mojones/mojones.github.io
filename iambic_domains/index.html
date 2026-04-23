@@ -644,7 +644,7 @@
 
     function rowMarkup(item, index) {
       const tags = item.tags.map((tag) => `<span class="token tag">${escapeHtml(tag)}</span>`).join("");
-      const registrationUrl = `https://www.dynadot.com/domain/search?rscreg=${encodeURIComponent(item.domain)}&rsc=preliminarywork`;
+      const registrationUrl = `https://www.dynadot.com/domain/search?rscreg=preliminarywork&domain=${encodeURIComponent(item.domain)}`;
       return `
         <article class="row">
           <span class="rank">#${(index + 1).toLocaleString()}</span>
